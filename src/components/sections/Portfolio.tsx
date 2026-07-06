@@ -1,8 +1,9 @@
 'use client';
 
+import Image from 'next/image';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { ExternalLink, Home, Stethoscope, Heart, Bot, ShieldCheck, Layers } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 const Github = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -13,44 +14,101 @@ const Github = (props: React.SVGProps<SVGSVGElement>) => (
 
 const projects = [
   {
-    title: 'Property Match',
-    description: 'Final year real estate web application allowing users to buy, sell, and rent properties easily. Features property listings, user login, chatbot, investment calculator, and a no-commission model.',
-    tags: ['Laravel', 'PHP', 'MySQL', 'HTML CSS', 'JavaScript'],
+    title: 'SineCure Medical Billing',
+    description:
+      'Developed a responsive WordPress website for a US-based medical billing company. Customized layouts, optimized performance, and built professional service pages showcasing medical billing, coding, revenue cycle management, claims processing, and HIPAA-compliant healthcare solutions.',
+    tags: ['WordPress', 'Elementor', 'Responsive Design'],
     github: 'https://github.com',
     live: 'https://github.com',
-    icon: Home,
+    image: '/projects/1.png',
     color: 'from-[#00E5FF] to-[#7C3AED]',
   },
   {
-    title: 'DevOps CI/CD Deployment',
-    description: 'Collaborative term project implementing DevOps practices using GitHub Actions. Followed Git flow to build and deploy static site workflows with staging and production environments, ensuring branch protection.',
-    tags: ['GitHub Actions', 'Git', 'HTML CSS', 'CI/CD', 'GitHub Pages'],
-    github: 'https://github.com',
-    live: 'https://github.com',
-    icon: ShieldCheck,
+    title: 'PropertyMatch - Real Estate Platform',
+    description:
+      'Developed a full-stack real estate web platform using Laravel, PHP, MySQL, HTML, CSS, JavaScript, and Bootstrap. PropertyMatch enables users to buy, sell, and rent properties through a user-friendly marketplace. Implemented features including property listings, user authentication, user dashboards, chatbot integration, investment calculator, and a no-commission property dealing model. Designed and developed responsive frontend interfaces along with backend functionality to provide a seamless real estate management experience.',
+    tags: ["Laravel",
+      "PHP",
+      "MySQL",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Bootstrap",
+      "Real Estate Platform",
+      "Chatbot Integration",
+      "Full Stack Development"],
+    github: '#',
+    live: '#',
+    image: '/projects/prop.jpg',
     color: 'from-[#7C3AED] to-[#22D3EE]',
   },
   {
-    title: 'Shopify E-Commerce Store',
-    description: 'Developed and optimized custom Shopify store layouts, integrating payment gateways, third-party apps, custom product management systems, and high performance storefront tuning.',
-    tags: ['Shopify', 'Liquid', 'JavaScript', 'Tailwind CSS'],
-    github: 'https://github.com',
-    live: 'https://github.com',
-    icon: Layers,
-    color: 'from-[#FF2D20] to-[#FF2D20]', // Let's import Layers if needed or use Home/Bot/ShieldCheck. Oh, wait, is Layers in the imports? Let's check imports in Portfolio.tsx on line 5
+    title: 'Next Step Movers & Packers (Dubai)',
+    description:
+      '"Developed a modern, responsive WordPress website for a Dubai-based business consultancy company specializing in company formation, visa services, and relocation support. Customized the WordPress theme using Elementor, structured service-focused landing pages, and created a professional, conversion-oriented design. The website highlights services such as business setup in UAE free zones, visa processing, Emirates ID assistance, and relocation guidance for entrepreneurs and families moving to Dubai.',
+    tags: ['WordPress', 'Elementor', 'Responsive Design', 'SEO Optimization'],
+    github: '#',
+    live: 'https://nextstepmp.com/',
+    image: '/projects/next.png',
+    color: 'from-[#00E5FF] to-[#FF2D20]',
   },
   {
-    title: 'AI WhatsApp Order Bot',
-    description: 'An AI-powered order automation bot designed to process conversational customer WhatsApp messages and synchronize order logs with Laravel backend databases.',
-    tags: ['Node.js', 'NestJS', 'Laravel', 'AI Integration'],
-    github: 'https://github.com',
-    live: 'https://github.com',
-    icon: Bot,
+    title: 'Employee Management CRM System',
+    description:
+      'Developed a complete Employee Management CRM system using Laravel, PHP, MySQL, HTML, CSS, and JavaScript. The system provides an efficient platform to manage employee records, departments, roles, attendance details, and administrative operations. Implemented database-driven functionality, CRUD operations, authentication, and a responsive dashboard interface to improve business workflow and employee management processes.',
+    tags: ['Laravel', 'PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'Database Management'],
+    github: '#',
+    live: 'https://eapp.esoftbay.com/',
+    image: '/projects/crm.JPG',
     color: 'from-[#22D3EE] to-green-400',
   },
+  {
+    title: 'LifeTouch Healthcare Wellness',
+    description:
+      'Developed a modern and responsive WordPress healthcare website for a mental health and psychiatry service provider. Customized the WordPress theme, designed professional service pages, and created a user-friendly interface to showcase psychiatric care, mental health evaluations, medication management, psychopharmacology, and telehealth services. Optimized the website for mobile responsiveness, performance, and an improved patient experience with a clean healthcare-focused design.',
+    tags: ["WordPress",
+      "Elementor",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Responsive Design",
+      "Healthcare Website",
+      "UI/UX Design",
+      "SEO Optimization"],
+    github: "#",
+    live: "https://lifetouchwellness.com/",
+    image: "/projects/mental.jpg",
+    color: "from-teal-500 to-cyan-600"
+  },
+    {
+  title: "Shoping World - E-Commerce Store",
+  description:
+    "Developed a modern and responsive WordPress e-commerce website for a UK-based online shopping store. Customized the WooCommerce-based layout, designed product pages, organized multiple product categories, and enhanced the overall shopping experience. Implemented a clean user interface for showcasing electronics, gaming accessories, computer products, home audio accessories, and fashion items with responsive design and optimized performance.",
+  tags: [
+    "WordPress",
+    "WooCommerce",
+    "Elementor",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "E-Commerce",
+    "Responsive Design",
+    "Product Management",
+    "SEO Optimization"
+  ],
+  github: "#",
+  live: "https://shopingworld.co.uk/",
+  image: "/projects/store.png",
+  color: "from-blue-500 to-purple-600"
+}
 ];
-
-function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
+function ProjectCard({
+  project,
+  index,
+}: {
+  project: (typeof projects)[number];
+  index: number;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   // Motion values for mouse position relative to card center
@@ -83,7 +141,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
     y.set(0);
   };
 
-  const Icon = project.icon;
+
 
   return (
     <motion.div
@@ -110,14 +168,21 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
       <div>
         {/* Project Header abstract image */}
         <div
-          className={`h-40 rounded-xl bg-gradient-to-br ${project.color} p-[1.5px] overflow-hidden mb-6 relative flex items-center justify-center`}
+          className={`relative h-48 rounded-xl overflow-hidden bg-gradient-to-br ${project.color} p-[1.5px] mb-6`}
           style={{ transform: 'translateZ(20px)' }}
         >
-          <div className="absolute inset-0 bg-slate-950/80 rounded-xl" />
-          {/* Animated decorative grid lines */}
-          <div className="absolute inset-0 opacity-15 bg-[linear-gradient(to_right,rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:14px_24px]" />
-          
-          <Icon className="h-12 w-12 text-white relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]" />
+          <div className="relative w-full h-full rounded-xl overflow-hidden">
+
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+
+          </div>
         </div>
 
         {/* Project Title */}
