@@ -77,6 +77,67 @@ function ParticlesBackground({ count = 120 }: { count?: number }) {
   );
 }
 
+// Wavy data ripples grid at the bottom-back
+function WavyGrid() {
+  const pointsRef = useRef<THREE.Points>(null);
+  const count = 30; // Grid of 30x30 points
+  const [positions, setPositions] = useState<Float32Array | null>(null);
+
+  useEffect(() => {
+    const pos = new Float32Array(count * count * 3);
+    let index = 0;
+    for (let x = 0; x < count; x++) {
+      for (let z = 0; z < count; z++) {
+        pos[index * 3] = (x - count / 2) * 0.4;     // X
+        pos[index * 3 + 1] = -2.3;                  // Y (placed at bottom)
+        pos[index * 3 + 2] = (z - count / 2) * 0.4; // Z
+        index++;
+      }
+    }
+    setPositions(pos);
+  }, []);
+
+  useFrame((state) => {
+    if (!pointsRef.current || !positions) return;
+    const time = state.clock.getElapsedTime();
+    const posAttr = pointsRef.current.geometry.attributes.position as THREE.BufferAttribute;
+    
+    let index = 0;
+    for (let x = 0; x < count; x++) {
+      for (let z = 0; z < count; z++) {
+        const currentX = (x - count / 2) * 0.4;
+        const currentZ = (z - count / 2) * 0.4;
+        const distance = Math.sqrt(currentX * currentX + currentZ * currentZ);
+        const yVal = -2.3 + Math.sin(distance * 0.8 - time * 1.5) * 0.22;
+        
+        posAttr.setY(index, yVal);
+        index++;
+      }
+    }
+    posAttr.needsUpdate = true;
+  });
+
+  if (!positions) return null;
+
+  return (
+    <points ref={pointsRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          args={[positions, 3]}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        color="#7C3AED"
+        size={0.03}
+        sizeAttenuation
+        transparent
+        opacity={0.35}
+      />
+    </points>
+  );
+}
+
 export default function SceneCanvas() {
   const [mounted, setMounted] = useState(false);
 
@@ -96,6 +157,7 @@ export default function SceneCanvas() {
         <pointLight position={[10, 10, 10]} intensity={1.5} color="#00E5FF" />
         <pointLight position={[-10, -10, -10]} intensity={1} color="#7C3AED" />
         <ParticlesBackground />
+        <WavyGrid />
         <InteractiveScene />
       </Canvas>
     </div>

@@ -20,6 +20,10 @@
   --accent: #22D3EE;
   --text-white: #FFFFFF;
   --text-muted: #A0AEC0;
+  
+  /* Cursor spotlight coordinates */
+  --mouse-x: 50%;
+  --mouse-y: 50%;
 }
 
 html {
@@ -51,60 +55,122 @@ body {
   background: rgba(0, 229, 255, 0.5);
 }
 
+/* Page Spotlight Glow Effect */
+.spotlight-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(0, 229, 255, 0.06) 0%,
+    rgba(124, 58, 237, 0.04) 50%,
+    transparent 100%
+  );
+  transition: opacity 0.3s ease;
+}
+
 /* Glassmorphism Styles */
 .glassmorphism {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .glassmorphism-hover {
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .glassmorphism-hover:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(0, 229, 255, 0.3);
-  box-shadow: 0 0 30px rgba(0, 229, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(0, 229, 255, 0.25);
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.1);
+  transform: translateY(-4px);
+}
+
+/* Premium Text Reveal Animation */
+.text-reveal-wrapper {
+  overflow: hidden;
+  position: relative;
 }
 
 /* Glow Borders and Text */
 .text-glow {
-  text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  text-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
 }
 
 .text-glow-purple {
-  text-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+  text-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
 }
 
 .border-glow {
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
-  border-color: rgba(0, 229, 255, 0.4);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+  border-color: rgba(0, 229, 255, 0.3);
+}
+
+/* Animated Border Glow for Premium Cards */
+@keyframes border-draw {
+  0%, 100% {
+    clip-path: inset(0 0 98% 0);
+  }
+  25% {
+    clip-path: inset(0 98% 0 0);
+  }
+  50% {
+    clip-path: inset(98% 0 0 0);
+  }
+  75% {
+    clip-path: inset(0 0 0 98%);
+  }
+}
+
+.glow-border-container {
+  position: relative;
+}
+
+.glow-border-line {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid transparent;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #00E5FF, #7C3AED) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.glow-border-container:hover .glow-border-line {
+  opacity: 1;
+  animation: border-draw 4s linear infinite;
 }
 
 /* Custom Cursor */
 .custom-cursor {
-  width: 24px;
-  height: 24px;
-  border: 2px solid rgba(0, 229, 255, 0.5);
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid rgba(0, 229, 255, 0.6);
   border-radius: 50%;
   position: fixed;
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 9999;
-  transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+  transition: width 0.25s, height 0.25s, background-color 0.25s, border-color 0.25s;
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .custom-cursor-dot {
-  width: 6px;
-  height: 6px;
-  background-color: #7C3AED;
+  width: 5px;
+  height: 5px;
+  background-color: #00E5FF;
   border-radius: 50%;
   position: fixed;
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 9999;
+  box-shadow: 0 0 10px #00E5FF;
 }
 
 /* Lenis Smooth Scroll standard setup */

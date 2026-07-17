@@ -21,6 +21,20 @@ import Contact from '@/components/sections/Contact';
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
+  // Dynamic mouse movements mapping to CSS properties for page spotlight
+  useEffect(() => {
+    if (isLoading) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      document.documentElement.style.setProperty('--mouse-x', `${clientX}px`);
+      document.documentElement.style.setProperty('--mouse-y', `${clientY}px`);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [isLoading]);
+
   // Initialize Lenis smooth scroll on mount
   useEffect(() => {
     if (isLoading) return;
@@ -58,6 +72,9 @@ export default function Home() {
           <CustomCursor />
           <ScrollProgressBar />
           <BackToTop />
+          
+          {/* Dynamic Page Cursor Spotlight */}
+          <div className="spotlight-bg" />
           
           {/* Sticky Navbar */}
           <Navbar />
